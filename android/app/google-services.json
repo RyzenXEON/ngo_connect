@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "429856852844",
+    "project_id": "ngo-connect-2f9a6",
+    "storage_bucket": "ngo-connect-2f9a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429856852844:android:40cda19fdbb7e2f2750149",
+        "android_client_info": {
+          "package_name": "com.example.ngo_connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "429856852844-venik492jk9o3ur4jvinb1ne8rhn702p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU9gkwWZ-Off-fQYF55PDYuplCab7X6_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429856852844-venik492jk9o3ur4jvinb1ne8rhn702p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "429856852844-b41fgo367jdte1sqp687i55t7lv4gaqs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ngoConnect.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
