@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ngo_connect/auth/auth_gate.dart';
 import 'package:ngo_connect/firebase_options.dart';
-import 'package:ngo_connect/pages/home_page.dart';
+import 'package:ngo_connect/pages/login.dart';
+import 'package:ngo_connect/pages/register_page.dart';
+import 'package:ngo_connect/pages/welcome_page.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,13 +13,22 @@ void main() async{
 
 class ngoConnect extends StatelessWidget {
   const ngoConnect({super.key});
+  
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       initialRoute: '/',
+  routes: {
+    // When navigating to the "/" route, build the FirstScreen widget.
+    
+    // When navigating to the "/second" route, build the SecondScreen widget.
+    '/login': (context) => const Login(),
+    '/register': (context) => const Register(),
+  },
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const WelcomePage(),
     );
   }
 }
