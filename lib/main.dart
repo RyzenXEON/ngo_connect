@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ngo_connect/firebase_options.dart';
+import 'package:ngo_connect/pages/home.dart';
 import 'package:ngo_connect/pages/login.dart';
+import 'package:ngo_connect/pages/ngo_screen.dart';
 import 'package:ngo_connect/pages/register_page.dart';
 import 'package:ngo_connect/pages/welcome_page.dart';
 
@@ -26,6 +28,9 @@ class ngoConnect extends StatelessWidget {
     // When navigating to the "/second" route, build the SecondScreen widget.
     '/login': (context) => const Login(),
     '/register': (context) => const Register(),
+    '/home': (context) => const HomePage(),
+    '/donate': (context) => const NGOScreen(),
+    '/profile': (context) => const HomePage(),
   },
       debugShowCheckedModeBanner: false,
       home: const WelcomePage(),

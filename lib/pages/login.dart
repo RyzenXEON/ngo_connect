@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ngo_connect/components/button.dart';
 import 'package:ngo_connect/components/text_field.dart';
+import 'package:ngo_connect/pages/home.dart';
+import 'package:ngo_connect/pages/register_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
-
-  void onTap() {}
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +61,19 @@ class Login extends StatelessWidget {
             const SizedBox(height: 15),
 
             //login button
-            MyButton(buttonName: "LOGIN", onTap: onTap),
+            MyButton(
+                buttonName: "LOGIN",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(child: const HomePage(), childCurrent: this, type: PageTransitionType.bottomToTop)
+                    );
+                }
+            ),
 
             const SizedBox(height: 15),
 
-            //new to ngo-connect? register 
+            //new to ngo-connect? register
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -77,8 +86,10 @@ class Login extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, '/register');
+                    Navigator.push(
+                      context,
+                      PageTransition(child: const Register(), childCurrent: this, type: PageTransitionType.rightToLeftWithFade)
+                    );
                   },
                   child: const Text(
                     "REGISTER",
@@ -89,14 +100,9 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 15),
-
-                
-
               ],
             ),
-            
           ],
         ),
       ),
