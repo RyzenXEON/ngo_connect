@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ngo_connect/auth/google_signin.dart';
 import 'package:ngo_connect/components/button.dart';
 import 'package:ngo_connect/components/text_field.dart';
 import 'package:ngo_connect/pages/home.dart';
-import 'package:ngo_connect/pages/login.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Register extends StatelessWidget {
@@ -106,7 +106,7 @@ class Register extends StatelessWidget {
                       Navigator.push(
                           context,
                           PageTransition(
-                              child: const Login(),
+                              child: const GoogleSignIn(),
                               childCurrent: this,
                               type: PageTransitionType.leftToRightWithFade));
                     },

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Home extends StatefulWidget {
+  
   Home({super.key});
 
   @override
@@ -9,6 +11,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? _user;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _auth.authStateChanges().listen((user) {
+      setState(() {
+        _user = user;
+      });
+    });
+    super.initState();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +38,8 @@ class _HomeState extends State<Home> {
                 width: 50,
                 height: 50,
                 color: Colors.transparent,
-                child: const Image(
-                  image: AssetImage('assets/images/user.png'),
+                child: Image(
+                  image: NetworkImage(_user!.photoURL!),
                   fit: BoxFit.cover,
                 ),
               ),

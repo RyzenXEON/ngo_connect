@@ -1,4 +1,4 @@
-/*
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget _googleSignInButton(){
     return Center(
       child: ElevatedButton(
-        onPressed: handdleGoogleSignIn,
+        onPressed: handleGoogleSignIn,
         
         child: const Text("Sign in with Google"),
       )
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void handdleGoogleSignIn() async{
+  void handleGoogleSignIn() async{
     try{
       GoogleAuthProvider googleProvider = GoogleAuthProvider();
       _auth.signInWithProvider(googleProvider);
@@ -82,4 +82,3 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-*/
