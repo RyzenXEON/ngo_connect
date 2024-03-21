@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   User? _user;
   @override
   void initState() {
-    // TODO: implement initState
     _auth.authStateChanges().listen((user) {
       setState(() {
         _user = user;

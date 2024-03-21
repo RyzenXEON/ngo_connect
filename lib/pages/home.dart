@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ngo_connect/pages/ngo_screen.dart';
 import 'package:ngo_connect/pages/ngo_page.dart';
+import 'package:ngo_connect/pages/profile_page.dart';
 import 'package:ngo_connect/pages/volunteer_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const NGOScreen(),
           const VolunteerPage(),
-          const NGOScreen(),
+          const ProfilePage(),
         ];
 
   @override
