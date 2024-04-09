@@ -32,6 +32,17 @@ class _GoogleSignInState extends State<GoogleSignIn> {
       body: _user !=null? const HomePage() : const Login(),
     );
   }
+  Future <UserCredential> signInWithEmailPassword(String email,password) async{
+    try{
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      return userCredential;
+    } on FirebaseAuthException catch(e){
+      // ignore: avoid_print
+      print(e);
+      throw Exception(e.code);
+    }
+    
+  }
   void handleGoogleSignIn() async{
     try{
       GoogleAuthProvider googleProvider = GoogleAuthProvider();

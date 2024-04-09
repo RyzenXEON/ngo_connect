@@ -1,12 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ngo_connect/auth/google_signin.dart';
 import 'package:ngo_connect/components/button.dart';
 import 'package:ngo_connect/components/text_field.dart';
 import 'package:ngo_connect/pages/home.dart';
+import 'package:ngo_connect/pages/verify_otp.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+  final TextEditingController _confirmController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  User? _user;
 
   @override
   Widget build(BuildContext context) {
@@ -52,40 +67,71 @@ class Register extends StatelessWidget {
               const SizedBox(height: 40),
 
               //name text field
-              const MyTextField(lable: 'Name', obscureText: false),
+              MyTextField(
+                  lable: 'Name',
+                  obscureText: false,
+                  controller: _nameController),
 
               const SizedBox(height: 15),
 
               //email text field
-              const MyTextField(lable: 'Email', obscureText: false),
+              MyTextField(
+                lable: 'Email',
+                obscureText: false,
+                controller: _emailController,
+              ),
 
               const SizedBox(height: 15),
 
               //password text field
-              const MyTextField(lable: 'Password', obscureText: true),
+              MyTextField(
+                  lable: 'Password',
+                  obscureText: true,
+                  controller: _pwController),
 
               const SizedBox(height: 15),
 
               //confirm password text field
-              const MyTextField(lable: 'Confirm', obscureText: true),
+              MyTextField(
+                  lable: 'Confirm',
+                  obscureText: true,
+                  controller: _confirmController),
 
               const SizedBox(height: 15),
 
               //phone text field
-              const MyTextField(lable: 'Phone', obscureText: false),
+              MyTextField(
+                  lable: 'Phone',
+                  obscureText: false,
+                  controller: _phoneController),
 
               const SizedBox(height: 15),
 
               //login button
               MyButton(
                   buttonName: "REGISTER",
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            child: const HomePage(),
-                            childCurrent: this,
-                            type: PageTransitionType.bottomToTop));
+                  onTap: () async {
+                    await _auth.verifyPhoneNumber(
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {},
+                      codeSent: (verificationId, resendToken) {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: VerifyOTP(
+                                  verificationId: verificationId,
+                                  displayName: _nameController.text,
+                                  email: _emailController.text,
+                                  password: _pwController.text,
+                                ),
+                                childCurrent: super.widget,
+                                type: PageTransitionType.leftToRightWithFade));
+                      },
+                      codeAutoRetrievalTimeout: (verificationId) {},
+                      phoneNumber: _phoneController.text,
+                      timeout: const Duration(seconds: 120),
+                    );
                   }),
 
               const SizedBox(height: 15),
@@ -107,7 +153,7 @@ class Register extends StatelessWidget {
                           context,
                           PageTransition(
                               child: const GoogleSignIn(),
-                              childCurrent: this,
+                              childCurrent: super.widget,
                               type: PageTransitionType.leftToRightWithFade));
                     },
                     child: const Text(

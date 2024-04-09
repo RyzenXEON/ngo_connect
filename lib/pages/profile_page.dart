@@ -34,6 +34,12 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 100),
 
               //user profile image
+              if (_user?.photoURL == null)
+                const CircleAvatar(
+                  radius: 80,
+                  backgroundImage: AssetImage('assets/images/user.png'),
+                )
+              else
               CircleAvatar(
                 radius: 80,
                 backgroundImage: NetworkImage(_user!.photoURL!),
@@ -42,7 +48,6 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 20,
               ),
-
               //user name
               Text(
                 _user?.displayName ?? 'User Name',

@@ -15,6 +15,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
   User? _user;
 
   @override
@@ -26,6 +28,7 @@ class _LoginState extends State<Login> {
       });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +74,12 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 40),
 
                   //email text field
-                  const MyTextField(lable: 'Email', obscureText: false),
+                  MyTextField(lable: 'Email', obscureText: false, controller: _emailController),
 
                   const SizedBox(height: 15),
 
                   //password text field
-                  const MyTextField(lable: 'Password', obscureText: true),
+                  MyTextField(lable: 'Password', obscureText: true, controller: _pwController),
 
                   const SizedBox(height: 15),
 
@@ -84,11 +87,18 @@ class _LoginState extends State<Login> {
                   MyButton(
                       buttonName: "LOGIN",
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                child: const HomePage(),
-                                type: PageTransitionType.bottomToTop));
+                        try{
+                        _auth.signInWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _pwController.text);
+                        }catch(e){
+                          showDialog(
+                            context: context,
+                            builder: (context)=> AlertDialog(
+                              title: Text(e.toString()),
+                            ),
+                          );
+                        }
                       }),
 
                   const SizedBox(height: 15),

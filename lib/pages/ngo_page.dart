@@ -37,10 +37,15 @@ class _HomeState extends State<Home> {
                 width: 50,
                 height: 50,
                 color: Colors.transparent,
-                child: Image(
-                  image: NetworkImage(_user!.photoURL!),
+                child: (_user?.photoURL == null)?
+                const Image(
+                  image: AssetImage('assets/images/user.png'),
                   fit: BoxFit.cover,
-                ),
+                ):
+                Image(
+                    image: NetworkImage(_user!.photoURL!),
+                    fit: BoxFit.cover,
+                  ),
               ),
             ),
           ),

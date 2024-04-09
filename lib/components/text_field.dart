@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final String lable;
   final bool obscureText;
+  final TextEditingController controller;
   const MyTextField({
     super.key,
     required this.lable,
     required this.obscureText,
+    required this.controller,
   });
 
   @override
@@ -14,6 +16,13 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
+        keyboardType: (lable == 'Phone')
+            ? TextInputType.phone
+            : (lable == 'OTP')
+                ? TextInputType.number
+                : TextInputType.text,
+
+        controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
           prefixIcon: Icon(
@@ -27,9 +36,11 @@ class MyTextField extends StatelessWidget {
                             ? Icons.person
                             : lable == 'Phone'
                                 ? Icons.phone
-                                :
-                                //else search icon
-                                Icons.search,
+                                : lable == 'OTP'
+                                    ? Icons.lock
+                                    :
+                                    //else search icon
+                                    Icons.search,
           ),
           enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
