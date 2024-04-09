@@ -111,6 +111,9 @@ class _RegisterState extends State<Register> {
               MyButton(
                   buttonName: "REGISTER",
                   onTap: () async {
+                    await _auth.createUserWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _pwController.text);
                     await _auth.verifyPhoneNumber(
                       verificationCompleted:
                           (PhoneAuthCredential credential) {},
@@ -122,8 +125,6 @@ class _RegisterState extends State<Register> {
                                 child: VerifyOTP(
                                   verificationId: verificationId,
                                   displayName: _nameController.text,
-                                  email: _emailController.text,
-                                  password: _pwController.text,
                                 ),
                                 childCurrent: super.widget,
                                 type: PageTransitionType.leftToRightWithFade));
