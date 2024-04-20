@@ -1,84 +1,144 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ngo_connect/resource/ngo_activity.dart';
 
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Home extends StatefulWidget {
+  Home({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final FirebaseAuth _auth=FirebaseAuth.instance;
+class _HomeState extends State<Home> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
-
   @override
   void initState() {
-    super.initState();
     _auth.authStateChanges().listen((user) {
       setState(() {
         _user = user;
       });
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text("Home        ")),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
-        elevation: 0,
-      ),
-      body: _user !=null? _userInfo() : _googleSignInButton(),
-    );
-  }
-
-  Widget _googleSignInButton(){
-    return Center(
-      child: ElevatedButton(
-        onPressed: handleGoogleSignIn,
-        
-        child: const Text("Sign in with Google"),
-      )
-    );
-  }
-
-  Widget _userInfo(){
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: NetworkImage(_user!.photoURL!),
-              fit: BoxFit.fill,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  ClipOval(
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      color: Colors.transparent,
+                      child: (_user?.photoURL == null)
+                          ? const Image(
+                              image: AssetImage('assets/images/user.png'),
+                              fit: BoxFit.cover,
+                            )
+                          : Image(
+                              image: NetworkImage(_user!.photoURL!),
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                  ),
+                  const SizedBox(width: 30),
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: (_user?.displayName != null)
+                              ? _user?.displayName
+                              : 'User Name',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const TextSpan(text: "\nLet's make a change..."),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        )],
+            const SizedBox(height: 20),
+
+            const TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151), width: 2)),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(4, 224, 92, 1), width: 2),
+                ),
+                hintText: "Search for NGO's...",
+                border: InputBorder.none,
+              ),
+            ),
+            //const SizedBox(height: 20),
+
+            //ngo lists
+
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: ngoActivities.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    elevation: 10,
+                    color: const Color.fromARGB(255, 175, 255, 207),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.asset(
+                              ngoActivities[index].image,
+                              width: double.infinity,
+                              height: 160,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(ngoActivities[index].title),
+                            subtitle: Text(ngoActivities[index].subHeading),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
-  }
-
-  void handleGoogleSignIn() async{
-    try{
-      GoogleAuthProvider googleProvider = GoogleAuthProvider();
-      _auth.signInWithProvider(googleProvider);
-      await _auth.signInAnonymously();
-    } catch(e){
-      print(e);
-    }
   }
 }
-
-

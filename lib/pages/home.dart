@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+//import 'package:ngo_connect/pages/ngo_page.dart';
 import 'package:ngo_connect/pages/ngo_screen.dart';
-import 'package:ngo_connect/pages/ngo_page.dart';
+import 'package:ngo_connect/pages/home_page.dart';
 import 'package:ngo_connect/pages/profile_page.dart';
 import 'package:ngo_connect/pages/volunteer_page.dart';
 

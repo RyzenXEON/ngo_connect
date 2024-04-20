@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Home extends StatefulWidget {
-  
   Home({super.key});
 
   @override
@@ -23,7 +22,6 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,15 +35,15 @@ class _HomeState extends State<Home> {
                 width: 50,
                 height: 50,
                 color: Colors.transparent,
-                child: (_user?.photoURL == null)?
-                const Image(
-                  image: AssetImage('assets/images/user.png'),
-                  fit: BoxFit.cover,
-                ):
-                Image(
-                    image: NetworkImage(_user!.photoURL!),
-                    fit: BoxFit.cover,
-                  ),
+                child: (_user?.photoURL == null)
+                    ? const Image(
+                        image: AssetImage('assets/images/user.png'),
+                        fit: BoxFit.cover,
+                      )
+                    : Image(
+                        image: NetworkImage(_user!.photoURL!),
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),
@@ -53,17 +51,19 @@ class _HomeState extends State<Home> {
             top: 75.0,
             left: 100.0,
             child: RichText(
-              text: const TextSpan(
-                style: TextStyle(
+              text: TextSpan(
+                style: const TextStyle(
                   fontSize: 16.0,
                   color: Colors.black,
                 ),
                 children: [
                   TextSpan(
-                    text: 'Hi user!',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    text: (_user?.displayName != null)
+                        ? _user?.displayName
+                        : 'User Name',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TextSpan(text: "\nLet's start donating..."),
+                  const TextSpan(text: "\nLet's make a change..."),
                 ],
               ),
             ),
@@ -79,7 +79,8 @@ class _HomeState extends State<Home> {
                   prefixIcon: Icon(Icons.search),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      borderSide: BorderSide(color:  Color.fromARGB(255, 151, 151, 151), width: 2)),
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 151, 151, 151), width: 2)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                     borderSide: BorderSide(
@@ -92,22 +93,62 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            top: 220.0,
-            left: 30.0,
-            child: Container(
-              width: MediaQuery.of(context).size.width - 60.0,
-              height: 150.0,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/ngo3.jpg'),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-            ),
-          ),
+            top: 250,
+              child: ListView.builder(
+                  itemCount: ngoActivities.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: const Color.fromRGBO(4, 224, 92, 1),
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(ngoActivities[index].image),
+                          ListTile(
+                            title: Text(ngoActivities[index].title),
+                            subtitle: Text(ngoActivities[index].subHeading),
+                          ),
+                        ],
+                      ),
+                    );
+                  })),
         ],
       ),
     );
   }
 }
+
+class NGOActivity {
+  final String image;
+  final String title;
+  final String subHeading;
+  final String text;
+
+  NGOActivity(
+      {required this.image,
+      required this.title,
+      required this.subHeading,
+      required this.text});
+}
+
+List<NGOActivity> ngoActivities = [
+  NGOActivity(
+    image: 'assets/images/ngo1.jpg',
+    title: 'Donations Making a Difference',
+    subHeading: 'Recent donations through NGO Connect helped',
+    text: 'xyz',
+  ),
+  NGOActivity(
+    image: 'assets/images/ngo2.jpg',
+    title: 'Warm Winter are Here!',
+    subHeading: 'Locals helping NGOs to provide warm clothes to the needy',
+    text: 'xyz',
+  ),
+  NGOActivity(
+    image: 'assets/images/ngo3.jpg',
+    title: 'Children Education Drive',
+    subHeading: 'Helping children to get education through monetary donations',
+    text: 'xyz',
+  ),
+];

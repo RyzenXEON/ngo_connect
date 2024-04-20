@@ -139,7 +139,12 @@ class _LoginState extends State<Login> {
                   //google sign in
                   ElevatedButton(
                     onPressed: handleGoogleSignIn,
-                    child: Icon(Icons.login),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5,
+                      shape: CircleBorder(),
+
+                    ),
+                    child: Image.asset('assets/images/google.png', scale: 35,),
                   )
                 ],
               ),
