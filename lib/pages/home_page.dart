@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ngo_connect/pages/article.dart';
 import 'package:ngo_connect/resource/ngo_activity.dart';
 
 class Home extends StatefulWidget {
@@ -97,7 +98,6 @@ class _HomeState extends State<Home> {
                 border: InputBorder.none,
               ),
             ),
-            const SizedBox(height: 10),
 
             //ngo lists
 
@@ -106,36 +106,47 @@ class _HomeState extends State<Home> {
                 shrinkWrap: true,
                 itemCount: ngoActivities.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    elevation: 10,
-                    color: const Color.fromARGB(255, 110, 253, 129),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image.asset(
-                              ngoActivities[index].image,
-                              width: double.infinity,
-                              height: 160,
-                              fit: BoxFit.cover,
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Article(
+                          activity: ngoActivities[index],
+                        ),
+                      ),
+                    
+                    ),
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 20),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      elevation: 10,
+                      color: const Color.fromARGB(255, 110, 253, 129),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Image.asset(
+                                ngoActivities[index].image,
+                                width: double.infinity,
+                                height: 160,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            ngoActivities[index].title,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
+                            const SizedBox(height: 5),
+                            Text(
+                              ngoActivities[index].title,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(ngoActivities[index].subHeading),
-                        ],
+                            const SizedBox(height: 10),
+                            Text(ngoActivities[index].subHeading),
+                          ],
+                        ),
                       ),
                     ),
                   );
