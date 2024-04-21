@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(
                       Icons.home,
                       size: 30,
-                      color: (_index==0)?const Color.fromRGBO(107, 189, 147, 1):const Color.fromARGB(255, 201, 201, 201),
+                      color: (_index==0)?const Color.fromRGBO(107, 189, 147, 1):const Color.fromARGB(255, 151, 151, 151),
                     ),
                     label: 'Home',
                   ),

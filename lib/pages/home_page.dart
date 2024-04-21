@@ -93,11 +93,11 @@ class _HomeState extends State<Home> {
                   borderSide: BorderSide(
                       color: Color.fromRGBO(4, 224, 92, 1), width: 2),
                 ),
-                hintText: "Search for NGO's...",
+                hintText: "Search for NGOs...",
                 border: InputBorder.none,
               ),
             ),
-            //const SizedBox(height: 20),
+            const SizedBox(height: 10),
 
             //ngo lists
 
@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0)),
                     elevation: 10,
-                    color: const Color.fromARGB(255, 175, 255, 207),
+                    color: const Color.fromARGB(255, 110, 253, 129),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -125,10 +125,16 @@ class _HomeState extends State<Home> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          ListTile(
-                            title: Text(ngoActivities[index].title),
-                            subtitle: Text(ngoActivities[index].subHeading),
+                          const SizedBox(height: 5),
+                          Text(
+                            ngoActivities[index].title,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
+                          const SizedBox(height: 10),
+                          Text(ngoActivities[index].subHeading),
                         ],
                       ),
                     ),

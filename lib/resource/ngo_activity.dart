@@ -16,7 +16,7 @@ List<NGOActivity> ngoActivities = [
   NGOActivity(
     image: 'assets/images/ngo1.jpg',
     title: 'Donations Making a Difference',
-    subHeading: 'Recent donations through NGO Connect helped',
+    subHeading: 'Recent donations through NGO Connect are helping people with medical needs',
     text: 'xyz',
   ),
   NGOActivity(

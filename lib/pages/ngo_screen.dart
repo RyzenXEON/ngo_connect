@@ -1,159 +1,135 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ngo_connect/resource/ngo_donation.dart';
 
 class NGOScreen extends StatelessWidget {
   const NGOScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Padding(
-        padding:
-            EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0, bottom: 20.0),
-        child: Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //searchbar
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 1.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 151, 151, 151),
-                              width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(
-                            color: Color.fromRGBO(4, 224, 92, 1), width: 2),
-                      ),
-                      hintText: "Search for NGO's...",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-
-                //ngo lists
-                SizedBox(height: 20),
-                NGOItem(
-                  image: 'assets/images/ngo1.jpg',
-                  name: 'NGO Name1',
-                  location: 'New Delhi, India',
-                  contact: '810-7685-910',
-                ),
-
-                SizedBox(height: 20),
-                NGOItem(
-                  image: 'assets/images/ngo2.jpg',
-                  name: 'NGO Name2',
-                  location: 'New Delhi, India',
-                  contact: '810-7685-910',
-                ),
-
-                SizedBox(height: 20),
-                NGOItem(
-                  image: 'assets/images/ngo3.jpg',
-                  name: 'NGO Name3',
-                  location: 'New Delhi, India',
-                  contact: '810-7685-910',
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class NGOItem extends StatelessWidget {
-  final String image;
-  final String name;
-  final String location;
-  final String contact;
-
-  const NGOItem({
-    super.key,
-    required this.image,
-    required this.name,
-    required this.location,
-    required this.contact,
-  });
-
-  //main stuff to look into - ngo picture in the cards
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 12,
-      color: Color.fromRGBO(207, 249, 227, 1),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                image,
-                height: 140,
-                width: double
-                    .infinity, // Ensure image takes full width of the card
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0, top: 15.0),
-              child: Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+            const SizedBox(height: 50),
+
+            //search bar
+            const TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 151, 151, 151), width: 2)),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(4, 224, 92, 1), width: 2),
                 ),
+                hintText: "Search for Donating...",
+                border: InputBorder.none,
               ),
             ),
+
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10.0,
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.location_on),
-                  SizedBox(width: 5),
-                  Text(
-                    location,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
+
+            //donation list
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: ngoDonations.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    elevation: 10,
+                    color: const Color.fromARGB(255, 110, 253, 129),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.asset(
+                              ngoDonations[index].image,
+                              width: double.infinity,
+                              height: 160,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            ngoDonations[index].name,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              ngoDonations[index].type == 'Monitory'
+                                  ? const Icon(
+                                      Icons.monetization_on,
+                                      size: 25,
+                                    )
+                                  : ngoDonations[index].type == 'Food'
+                                      ? const Icon(
+                                          Icons.food_bank,
+                                          size: 30,
+                                        )
+                                      : const ImageIcon(
+                                          AssetImage('assets/images/shirt.png'),
+                                          size: 22,
+                                        ),
+                              const SizedBox(width: 10),
+                              Text(
+                                ngoDonations[index].type,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 14),
+                              ),
+                              const SizedBox(width: 100),
+                              const Icon(
+                                Icons.phone,
+                                size: 25,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                ngoDonations[index].contact,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 14),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              const SizedBox(width: 8),
+                              const Icon(
+                                Icons.location_on,
+                                size: 25,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                ngoDonations[index].location,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0, bottom: 10.0),
-              child: Row(
-                children: [
-                  Icon(Icons.phone),
-                  SizedBox(width: 5),
-                  Text(
-                    contact,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            )
           ],
         ),
       ),
