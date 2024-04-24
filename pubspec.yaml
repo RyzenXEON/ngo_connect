@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^4.17.8
   page_transition: ^2.1.0
   cloud_firestore: ^4.17.0
+  upi_india: ^3.0.1
+  geolocator: ^11.0.0
 
 dev_dependencies:
   flutter_test:
