@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ngo_connect/auth/google_signin.dart';
 import 'package:ngo_connect/components/button.dart';
 import 'package:ngo_connect/components/text_field.dart';
-import 'package:ngo_connect/pages/home.dart';
 import 'package:ngo_connect/pages/verify_otp.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -21,7 +20,6 @@ class _RegisterState extends State<Register> {
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  User? _user;
 
   @override
   Widget build(BuildContext context) {

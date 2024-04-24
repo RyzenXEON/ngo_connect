@@ -5,8 +5,8 @@ import 'package:ngo_connect/components/text_field.dart';
 import 'package:ngo_connect/pages/home.dart';
 
 class VerifyOTP extends StatefulWidget {
-  String verificationId;
-  String displayName;
+  final String verificationId;
+  final String displayName;
   VerifyOTP({
     super.key,
     required this.verificationId,

@@ -2,9 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ngo_connect/auth/google_signin.dart';
 import 'package:ngo_connect/firebase_options.dart';
-import 'package:ngo_connect/pages/verify_otp.dart';
 import 'package:ngo_connect/pages/welcome_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
