@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ngo_connect/pages/ngo_page.dart';
 
 class NGOActivity {
   final String image;
