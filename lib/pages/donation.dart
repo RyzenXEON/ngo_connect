@@ -66,156 +66,158 @@ class _DonationState extends State<Donation> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 50),
-
-            //image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15.0),
-              child: Image.asset(
-                widget.donation.image,
-                width: double.infinity,
-                height: 180,
-                fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 50),
+          
+              //image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.asset(
+                  widget.donation.image,
+                  width: double.infinity,
+                  height: 180,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              widget.donation.name,
-              style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 170, 57)),
-            ),
-            const SizedBox(height: 20),
-
-            //Type of donation
-            Row(
-              children: [
-                const SizedBox(width: 30),
-                widget.donation.type == 'Monitory'
-                    ? const Icon(
-                        Icons.monetization_on,
-                        size: 25,
-                      )
-                    : widget.donation.type == 'Food'
-                        ? const Icon(
-                            Icons.food_bank,
-                            size: 30,
-                          )
-                        : const ImageIcon(
-                            AssetImage('assets/images/shirt.png'),
-                            size: 22,
-                          ),
-                const SizedBox(width: 10),
-                Text(
-                  widget.donation.type,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400, fontSize: 14),
-                ),
-                const SizedBox(width: 10),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            //phone number
-            Row(
-              children: [
-                const SizedBox(width: 30),
-                const Icon(
-                  Icons.phone,
-                  size: 25,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  widget.donation.contact,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400, fontSize: 14),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            //Location
-            Row(
-              children: [
-                const SizedBox(width: 30),
-                const Icon(
-                  Icons.location_on,
-                  size: 25,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  widget.donation.location,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400, fontSize: 14),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            //Amount
-            if (widget.donation.type == 'Monitory')
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: TextField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.currency_rupee),
-                    labelText: 'Amount',
-                    labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 0, 170, 57),
-                        fontWeight: FontWeight.bold),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 0, 170, 57),
-                        width: 2,
+              const SizedBox(height: 20),
+              Text(
+                widget.donation.name,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 170, 57)),
+              ),
+              const SizedBox(height: 20),
+          
+              //Type of donation
+              Row(
+                children: [
+                  const SizedBox(width: 30),
+                  widget.donation.type == 'Monitory'
+                      ? const Icon(
+                          Icons.monetization_on,
+                          size: 25,
+                        )
+                      : widget.donation.type == 'Food'
+                          ? const Icon(
+                              Icons.food_bank,
+                              size: 30,
+                            )
+                          : const ImageIcon(
+                              AssetImage('assets/images/shirt.png'),
+                              size: 22,
+                            ),
+                  const SizedBox(width: 10),
+                  Text(
+                    widget.donation.type,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 14),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
+              const SizedBox(height: 20),
+          
+              //phone number
+              Row(
+                children: [
+                  const SizedBox(width: 30),
+                  const Icon(
+                    Icons.phone,
+                    size: 25,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    widget.donation.contact,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+          
+              //Location
+              Row(
+                children: [
+                  const SizedBox(width: 30),
+                  const Icon(
+                    Icons.location_on,
+                    size: 25,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    widget.donation.location,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 14),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+          
+              //Amount
+              if (widget.donation.type == 'Monitory')
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TextField(
+                    controller: amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.currency_rupee),
+                      labelText: 'Amount',
+                      labelStyle: const TextStyle(
+                          color: Color.fromARGB(255, 0, 170, 57),
+                          fontWeight: FontWeight.bold),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 0, 170, 57),
+                          width: 2,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-
-            const SizedBox(height: 30),
-            MyButton(
-                buttonName: 'DONATION',
-                onTap: () async {
-                  if (widget.donation.type == 'Monitory') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MonitoryDonation(
-                                amount: double.parse(amountController.text))));
-                  } else {
-                    final position = await getCurrentLocation();
-
-                    //adding Location and PhoneNumber to the database if not already present
-                    addDonationDetails(widget.donation.name,
-                        position as Position, widget.donation.type);
-
-                    //Notification of successful donation details submitted
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'Donation Details Submitted Successfully, you will be called shortly for further details.',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Color.fromARGB(255, 0, 170, 57)),
+          
+              const SizedBox(height: 30),
+              MyButton(
+                  buttonName: 'DONATION',
+                  onTap: () async {
+                    if (widget.donation.type == 'Monitory') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MonitoryDonation(
+                                  amount: double.parse(amountController.text))));
+                    } else {
+                      final position = await getCurrentLocation();
+          
+                      //adding Location and PhoneNumber to the database if not already present
+                      addDonationDetails(widget.donation.name,
+                          position as Position, widget.donation.type);
+          
+                      //Notification of successful donation details submitted
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Donation Details Submitted Successfully, you will be called shortly for further details.',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 0, 170, 57)),
+                          ),
+                          duration: Duration(seconds: 10),
                         ),
-                        duration: Duration(seconds: 10),
-                      ),
-                    );
-                  }
-                }),
-          ],
+                      );
+                    }
+                  }),
+            ],
+          ),
         ),
       ),
     );

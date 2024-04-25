@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ngo_connect/pages/about_us.dart';
+import 'package:ngo_connect/pages/personal_detail.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -60,35 +64,42 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 40),
 
               //my profile
-              Container(
-                padding: const EdgeInsets.all(8),
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 151, 151, 151)),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: Color.fromARGB(255, 151, 151, 151),
-                    ),
-                    Text(
-                      'My Profile',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 100, 100, 100),
-                      ),
-                    ),
-
-                    Icon(
-                        Icons.arrow_forward_ios,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const PersonalDetails();
+                  }));
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 151, 151, 151)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.person,
                         color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                  ],
+                      Text(
+                        'My Profile',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 100, 100, 100),
+                        ),
+                      ),
+                
+                      Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color.fromARGB(255, 151, 151, 151),
+                        ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -128,35 +139,42 @@ class _ProfilePageState extends State<ProfilePage> {
 
               const SizedBox(height: 10),
 
-              Container(
-                padding: const EdgeInsets.all(8),
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 151, 151, 151)),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.info,
-                      color: Color.fromARGB(255, 151, 151, 151),
-                    ),
-                    Text(
-                      'About Us',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 100, 100, 100),
-                      ),
-                    ),
-
-                    Icon(
-                        Icons.arrow_forward_ios,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const AboutUs();
+                  }));
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 151, 151, 151)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.info,
                         color: Color.fromARGB(255, 151, 151, 151),
                       ),
-                  ],
+                      Text(
+                        'About Us',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 100, 100, 100),
+                        ),
+                      ),
+                
+                      Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color.fromARGB(255, 151, 151, 151),
+                        ),
+                    ],
+                  ),
                 ),
               ),
 
