@@ -25,34 +25,3 @@ class NGODonation {
     );
   }
 }
-
-// List<NGODonation> ngoDonations = [
-//   NGODonation(
-//     image: 'assets/images/donation1.jpg',
-//     name: 'Children Education Drive',
-//     type: 'Monitory',
-//     location: 'Safdarjung, New Delhi - India',
-//     contact: '810-7685-910',
-//   ),
-//   NGODonation(
-//     image: 'assets/images/donation2.jpg',
-//     name: 'Sathi Foundation',
-//     type: 'Clothes',
-//     location: 'Indira Nagar, Ghaziabad - UP',
-//     contact: '810-7685-910',
-//   ),
-//   NGODonation(
-//     image: 'assets/images/donation3.jpg',
-//     name: 'Jeevan Dhara',
-//     type: 'Food',
-//     location: 'Electronic City, Noida - UP',
-//     contact: '810-7685-910',
-//   ),
-//   NGODonation(
-//     image: 'assets/images/donation4.jpg',
-//     name: 'Women Welfare Association',
-//     type: 'Monitory',
-//     location: 'Chandni Chowk, New Delhi - India',
-//     contact: '810-7685-910',
-//   ),
-// ];
